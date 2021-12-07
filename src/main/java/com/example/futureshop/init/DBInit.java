@@ -27,5 +27,7 @@ public class DBInit implements CommandLineRunner {
 
         brandRepository.saveAll(List.of(asus, gigabyte));
 
+        //TODO: Try to initialize an offer with a init method
+
     }
 }
