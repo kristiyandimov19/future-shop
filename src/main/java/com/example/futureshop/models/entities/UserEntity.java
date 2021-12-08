@@ -18,7 +18,7 @@ public class UserEntity extends BaseEntity {
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRoleEntity> userRoles = new ArrayList<>();
+    private List<UserRoleEntity> roles = new ArrayList<>();
 
     public String getUsername() {
         return username;
@@ -47,12 +47,12 @@ public class UserEntity extends BaseEntity {
         return this;
     }
 
-    public List<UserRoleEntity> getUserRoles() {
-        return userRoles;
+    public List<UserRoleEntity> getRoles() {
+        return roles;
     }
 
     public UserEntity setUserRoles(List<UserRoleEntity> userRoles) {
-        this.userRoles = userRoles;
+        this.roles = userRoles;
         return this;
     }
 }
