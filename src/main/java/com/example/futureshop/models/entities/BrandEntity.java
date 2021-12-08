@@ -1,4 +1,4 @@
-package com.example.futureshop.entities;
+package com.example.futureshop.models.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

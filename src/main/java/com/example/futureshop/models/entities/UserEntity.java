@@ -1,6 +1,4 @@
-package com.example.futureshop.entities;
-
-import com.example.futureshop.entities.enums.UserRoleEnum;
+package com.example.futureshop.models.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;

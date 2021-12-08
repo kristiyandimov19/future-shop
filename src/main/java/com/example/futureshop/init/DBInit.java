@@ -1,6 +1,6 @@
 package com.example.futureshop.init;
 
-import com.example.futureshop.entities.BrandEntity;
+import com.example.futureshop.models.entities.BrandEntity;
 import com.example.futureshop.repositories.BrandRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

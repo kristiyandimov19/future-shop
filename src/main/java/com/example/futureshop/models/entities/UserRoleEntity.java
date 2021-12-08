@@ -1,6 +1,6 @@
-package com.example.futureshop.entities;
+package com.example.futureshop.models.entities;
 
-import com.example.futureshop.entities.enums.UserRoleEnum;
+import com.example.futureshop.models.entities.enums.UserRoleEnum;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,7 +8,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "user_roles")
+@Table(name = "roles")
 public class UserRoleEntity extends BaseEntity {
 
     @Enumerated(value = EnumType.STRING)

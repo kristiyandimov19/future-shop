@@ -1,9 +1,8 @@
-package com.example.futureshop.entities;
+package com.example.futureshop.models.entities;
 
-import com.example.futureshop.entities.enums.ModelCategoryEnum;
+import com.example.futureshop.models.entities.enums.ModelCategoryEnum;
 
 import javax.persistence.*;
-import java.math.BigInteger;
 
 @Table(name = "models")
 @Entity

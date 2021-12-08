@@ -1,4 +1,4 @@
-package com.example.futureshop.entities.enums;
+package com.example.futureshop.models.entities.enums;
 
 public enum ModelCategoryEnum {
     DESKTOP_PC,
