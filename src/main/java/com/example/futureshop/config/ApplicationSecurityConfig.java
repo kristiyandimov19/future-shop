@@ -1,6 +1,6 @@
 package com.example.futureshop.config;
 
-import com.example.futureshop.services.FutureDBUserService;
+import com.example.futureshop.services.impl.FutureDBUserService;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

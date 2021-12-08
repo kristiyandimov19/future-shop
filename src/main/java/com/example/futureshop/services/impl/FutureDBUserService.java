@@ -1,4 +1,4 @@
-package com.example.futureshop.services;
+package com.example.futureshop.services.impl;
 
 import com.example.futureshop.models.entities.UserEntity;
 import com.example.futureshop.repositories.UserRepository;
