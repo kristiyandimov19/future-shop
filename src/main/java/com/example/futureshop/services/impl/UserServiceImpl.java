@@ -3,6 +3,7 @@ package com.example.futureshop.services.impl;
 import com.example.futureshop.models.entities.UserEntity;
 import com.example.futureshop.models.entities.UserRoleEntity;
 import com.example.futureshop.models.entities.enums.UserRoleEnum;
+import com.example.futureshop.models.services.UserRegisterServiceModel;
 import com.example.futureshop.repositories.UserRepository;
 import com.example.futureshop.repositories.UserRoleRepository;
 import com.example.futureshop.services.UserService;
@@ -48,5 +49,11 @@ public class UserServiceImpl implements UserService {
             userRepository.saveAll(List.of(admin, user));
 
         }
+    }
+
+    @Override
+    public void registerAndLoginUser(UserRegisterServiceModel serviceModel) {
+        throw new UnsupportedOperationException("NOT YET");
+        //todo coming soon
     }
 }
