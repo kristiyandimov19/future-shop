@@ -38,6 +38,9 @@
                             <div class="invalid-feedback">
                                 Username must be longer than 3 characters
                             </div>
+                            <div id="usernameUniqueError" th:if="${userExistsError}" class="text-danger">
+                                Username already exists
+                            </div>
                         </div>
                         
                         <div class="col-12">
