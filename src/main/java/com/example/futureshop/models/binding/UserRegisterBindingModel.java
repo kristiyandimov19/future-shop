@@ -1,10 +1,27 @@
 package com.example.futureshop.models.binding;
 
+import com.example.futureshop.models.validators.FieldMatch;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword"
+)
 public class UserRegisterBindingModel {
 
+    @NotEmpty
+    @Size(min = 3)
     private String username;
+    @Email
+    @NotEmpty
     private String email;
+    @Size(min = 5)
+    @NotEmpty
     private String password;
+    @NotEmpty
     private String confirmPassword;
 
     public String getUsername() {

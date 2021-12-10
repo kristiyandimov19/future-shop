@@ -5,9 +5,14 @@ import com.example.futureshop.models.services.UserRegisterServiceModel;
 import com.example.futureshop.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
@@ -21,6 +26,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ModelAttribute("registerBindingModel")
+    public UserRegisterBindingModel createBindingModel() {
+        return new UserRegisterBindingModel();
+    }
+
     @GetMapping("/login")
     public String showLogin() {
         return "login";
@@ -32,11 +42,23 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerAndLoginUser(UserRegisterBindingModel registerBindingModel) {
+    public String registerAndLoginUser(
+            @Valid UserRegisterBindingModel registerBindingModel,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("registerBindingModel", registerBindingModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.registerBindingModel", bindingResult);
+
+            return "redirect:/users/register";
+        }
+
         UserRegisterServiceModel userServiceModel =
                 modelMapper.map(registerBindingModel, UserRegisterServiceModel.class);
         userService.registerAndLoginUser(userServiceModel);
-        //todo validation
+
+
 
         return "redirect:/home";
     }

@@ -18,25 +18,49 @@
         <div class="row">
             <div class="col-md-4 offset-md-4">
                 <div class="shadow p-3 mb-5 rounded login-form bg-light mt-4 p-4">
-                    <form th:action="@{/users/register}" method="POST" class="row g-3">
+                    <form th:action="@{/users/register}" method="POST" th:object="${registerBindingModel}" class="row g-3">
                         <h1>Register</h1>
                         <div class="col-12">
                             <label>Email</label>
-                            <input type="email" name="email" class="form-control" placeholder="email@address.com">
+                            <input type="email" name="email" th:value="*{email}"
+                                   th:errorclass="is-invalid"
+                                   class="form-control" placeholder="email@address.com">
+                        </div>
+                        <div class="invalid-feedback">
+                            Email must be valid
                         </div>
                         <div class="col-12">
                             <label>Username</label>
-                            <input type="text" name="username" class="form-control" placeholder="Username">
+                            <input type="text" name="username"
+                                   th:value="*{username}"
+                                   th:errorclass="is-invalid"
+                                   class="form-control" placeholder="Username">
+                            <div class="invalid-feedback">
+                                Username must be longer than 3 characters
+                            </div>
                         </div>
                         
                         <div class="col-12">
                             <label>Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password">
+                            <input type="password"
+                                   name="password"
+                                   th:errorclass="is-invalid"
+                                   class="form-control" placeholder="Password">
+                            <div class="invalid-feedback">
+                                Password must be longer than 5 characters
+                            </div>
                         </div>
+
                         <div class="col-12">
                             <label>Confirm Password</label>
-                            <input type="password" name="confirmPassword" class="form-control" placeholder="ConfirmPassword">
+                            <input type="password"
+                                   th:errorclass="is-invalid"
+                                   name="confirmPassword" class="form-control" placeholder="ConfirmPassword">
+                            <div class="invalid-feedback">
+                                Passwords must match
+                            </div>
                         </div>
+
                         <div class="col-12">
                             <button type="submit" class="btn btn-success float-end">Register</button>
                         </div>
