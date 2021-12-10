@@ -7,6 +7,11 @@ import com.example.futureshop.models.services.UserRegisterServiceModel;
 import com.example.futureshop.repositories.UserRepository;
 import com.example.futureshop.repositories.UserRoleRepository;
 import com.example.futureshop.services.UserService;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +23,17 @@ public class UserServiceImpl implements UserService {
     private final UserRoleRepository userRoleRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
+    private final FutureDBUserService futureDBUserService;
+    private final PasswordEncoder encoder;
 
-    public UserServiceImpl(UserRoleRepository userRoleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRoleRepository userRoleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, FutureDBUserService futureDBUserService, PasswordEncoder encoder) {
         this.userRoleRepository = userRoleRepository;
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
+        this.futureDBUserService = futureDBUserService;
+        this.encoder = encoder;
     }
 
     @Override
@@ -53,7 +64,27 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerAndLoginUser(UserRegisterServiceModel serviceModel) {
-        throw new UnsupportedOperationException("NOT YET");
-        //todo coming soon
+        UserEntity newUser = modelMapper.map(serviceModel, UserEntity.class);
+        newUser.setPassword(passwordEncoder.encode(serviceModel.getPassword()));
+
+        UserRoleEntity userRole = userRoleRepository
+                .findByRole(UserRoleEnum.USER)
+                .orElseThrow(
+                        () -> new IllegalStateException("USER role not found. Please seed the roles."));
+
+        newUser.addRole(userRole);
+
+        userRepository.save(newUser);
+
+        UserDetails principal = futureDBUserService.loadUserByUsername(newUser.getUsername());
+
+        Authentication authentication =
+                new UsernamePasswordAuthenticationToken(
+                        principal,
+                        newUser.getPassword(),
+                        principal.getAuthorities()
+                );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }
