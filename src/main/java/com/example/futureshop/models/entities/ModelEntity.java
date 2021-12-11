@@ -15,10 +15,16 @@ public class ModelEntity extends BaseEntity {
     private ModelCategoryEnum category;
 
     @Column(nullable = false)
-    private String imageUrl;
+    private String brand;
 
-    @ManyToOne
-    private BrandEntity brand;
+    public String getBrand() {
+        return brand;
+    }
+
+    public ModelEntity setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
 
     public String getName() {
         return name;
@@ -38,22 +44,5 @@ public class ModelEntity extends BaseEntity {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public ModelEntity setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-        return this;
-    }
-
-    public BrandEntity getBrand() {
-        return brand;
-    }
-
-    public ModelEntity setBrand(BrandEntity brand) {
-        this.brand = brand;
-        return this;
-    }
 
 }

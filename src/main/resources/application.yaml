@@ -16,3 +16,8 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
+
+cloudinary:
+  cloud-name: dyidaambf
+  api-key: 678139597139657
+  api-secret: "${CLOUDINARY_SECRET}"
