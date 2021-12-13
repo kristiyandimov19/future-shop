@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="navbar::head">
+
+</head>
+<body>
+
+<style th:fragment="style">
+    @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+    body {
+        background: url('https://res.cloudinary.com/dyidaambf/image/upload/v1639415274/Background_1_jn68m4.png') no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+        height: 100%;
+        font-family: 'Bakbak One', cursive;
+    }
+    textarea:focus,
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="datetime"]:focus,
+    input[type="datetime-local"]:focus,
+    input[type="date"]:focus,
+    input[type="month"]:focus,
+    input[type="time"]:focus,
+    input[type="week"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    input[type="search"]:focus,
+    input[type="tel"]:focus,
+    input[type="color"]:focus,
+    .uneditable-input:focus {
+        border-color: orange;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgb(255, 255, 255);
+        outline: 0 none;
+    }
+
+    .login-form {
+        color: orange;
+    }
+    .btn-warning {
+        background-color: orange;
+    }
+
+</style>
+
+</body>
+</html>
