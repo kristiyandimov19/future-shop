@@ -1,5 +1,6 @@
 package com.example.futureshop.init;
 
+import com.example.futureshop.services.DishService;
 import com.example.futureshop.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -8,9 +9,11 @@ import org.springframework.stereotype.Component;
 public class DBInit implements CommandLineRunner {
 
     private final UserService userService;
+    private final DishService dishService;
 
-    public DBInit(UserService userService) {
+    public DBInit(UserService userService, DishService dishService) {
         this.userService = userService;
+        this.dishService = dishService;
     }
 
     @Override
@@ -18,8 +21,7 @@ public class DBInit implements CommandLineRunner {
 
         userService.seedUsers();
 
-        //TODO: Try to initialize an offer with an init method
-
+        dishService.seedDishes();
     }
 
 }

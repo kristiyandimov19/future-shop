@@ -1,6 +1,7 @@
 package com.example.futureshop.services.impl;
 
 import com.example.futureshop.models.entities.UserEntity;
+import com.example.futureshop.models.entities.UserRoleEntity;
 import com.example.futureshop.repositories.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,7 +38,7 @@ public class FutureDBUserService implements UserDetailsService {
                 userEntity
                         .getRoles()
                         .stream()
-                        .map(r -> new SimpleGrantedAuthority("ROLE_" + r.getRole().name()))
+                        .map(this::map)
                         .collect(Collectors.toList());
 
         return new User(
@@ -45,5 +46,9 @@ public class FutureDBUserService implements UserDetailsService {
                 userEntity.getPassword(),
                 authorities
         );
+    }
+
+    private GrantedAuthority map(UserRoleEntity userRoleEntity) {
+        return new SimpleGrantedAuthority(userRoleEntity.getRole().name());
     }
 }
