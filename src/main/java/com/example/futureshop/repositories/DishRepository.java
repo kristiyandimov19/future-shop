@@ -12,4 +12,6 @@ public interface DishRepository extends JpaRepository<DishEntity, Long> {
 
     @Query("SELECT d.name FROM DishEntity d")
     List<String> findAllDishes();
+
+    DishEntity findByName(String name);
 }

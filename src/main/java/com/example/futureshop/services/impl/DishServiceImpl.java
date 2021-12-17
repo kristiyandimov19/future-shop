@@ -83,4 +83,9 @@ public class DishServiceImpl implements DishService {
     public List<String> findAllDishes() {
         return dishRepository.findAllDishes();
     }
+
+    @Override
+    public DishEntity findByName(String name) {
+        return dishRepository.findByName(name);
+    }
 }

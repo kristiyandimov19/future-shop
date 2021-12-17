@@ -12,21 +12,28 @@
             <div class="shadow p-3 mb-5 login-form bg-dark mt-4 p-4 bg-image"
                  style="border-radius: 20px;">
 
-                <form th:action="@{/restaurants/add}" method="POST" class="row g-3" >
+                <form th:object="${restaurantAddBindingModel}" th:action="@{/restaurants/add}" method="POST" class="row g-3" >
                     <h1>Add Restaurant</h1>
                     <div class="col-12">
                         <label>Name</label>
                         <input type="text" name="name"
-
+                               th:field="*{name}"
+                               th:errorclass="is-invalid"
                                class="form-control" placeholder="Name">
+                        <div class="invalid-feedback">
+                            You must enter a name
+                        </div>
                     </div>
                     <div class="col-12">
                         <label>Address</label>
-                        <input type="password" name="address" class="form-control" placeholder="Address">
+                        <input type="text" name="address"
+                               th:field="*{address}"
+                               th:errorclass="is-invalid"
+                               class="form-control" placeholder="Address">
                     </div>
                     <div class="col">
                         <label>Dishes</label>
-                        <select class="form-select" size="3" multiple>
+                        <select th:field="*{dishes}" th:errorclass="is-invalid" class="form-select" size="3" multiple>
                             <option th:each="d : ${dishes}" th:value="${d}" th:text="${d}"></option>
                         </select>
                     </div>
