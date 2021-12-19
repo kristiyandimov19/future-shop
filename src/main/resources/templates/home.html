@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar::head">
+
+</head>
+<body>
+
+<div th:replace="fragments/navbar::navbar"></div>
+
+<div  class="row row-cols-1 row-cols-md-3 g-4 m-4 dish-container">
+<div>
+
+</div>
+</div>
+
+
+<style th:replace="fragments/style::style"></style>
+
+<!--
+TODO- MANAGE USER ROLES TAB-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js">
+
+</script>
+
+<script>
+    $('#loadDishes').click(() => {
+        $('.dish-container').empty();
+
+        fetch("http://localhost:8080/dishesRest")
+            .then((response) => response.json())
+            .then((json) => json.forEach((dish) => {
+                let img = '<img src="'+ dish.imageUrl +'" class="card-img-top" alt="...">';
+                let allergensString = '';
+                dish.allergens.forEach(a => {
+                    allergensString = allergensString + a + ' ';
+                })
+                let allergens = '<p class="card-text">'+ allergensString +'</p>';
+
+                let card = '<div class="col">' +
+                    '<div class="card h-100">' +
+                    img +
+                    '<div class="card-body">' +
+                    '<h5 class="card-title">'+ dish.name +'</h5>' +
+                    '<li class="list-group-item">' +
+                    'Ingredients: ' + dish.ingredients +
+                    '</li>' +
+                    '<li class="list-group-item">' +
+                    'Allergens: ' + allergens +
+                    '</li>' +
+                    '</div>' +
+                    '<ul class="list-group list-group-flush">' +
+                    '<li class="list-group-item">' +
+                    'Proportions: ' + dish.proportions + 'g' +
+                    '</li>' +
+                    '<li class="list-group-item">' +
+                    'Price: ' + dish.price + 'lv' +
+                    '</li>' +
+                    '</ul>' +
+                    '</div>' +
+                    '</div>';
+
+                $('.dish-container').append(card);
+            }))
+    })
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

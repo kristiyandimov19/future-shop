@@ -1,21 +1,29 @@
 package com.example.futureshop.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "restaurants")
 public class RestaurantEntity extends BaseEntity {
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String address;
-    @OneToMany
+    @Column(nullable = false)
+    private String imageUrl;
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<DishEntity> dishes;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public RestaurantEntity setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
 
     public String getName() {
         return name;

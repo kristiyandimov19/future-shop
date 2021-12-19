@@ -6,7 +6,17 @@ public class RestaurantServiceModel {
 
     private String name;
     private String address;
+    private String imageUrl;
     private List<String> dishes;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public RestaurantServiceModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
 
     public String getName() {
         return name;

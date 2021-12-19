@@ -27,7 +27,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/restaurants/add")
+                .antMatchers("/restaurants/add", "/users/all")
                 .hasAuthority("ADMIN")
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
                 .antMatchers("/**")
@@ -46,7 +46,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
 
-        //TODO CUSTOM ERROR HANDLING PAGE
     }
 
     @Override

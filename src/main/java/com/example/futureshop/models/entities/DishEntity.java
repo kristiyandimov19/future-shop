@@ -1,5 +1,7 @@
 package com.example.futureshop.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.List;
@@ -18,9 +20,22 @@ public class DishEntity extends BaseEntity {
     private String ingredients;
     @Column(nullable = false)
     private String imageUrl;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private UserEntity user;
     @Column(nullable = false)
     @ManyToMany(fetch = FetchType.EAGER)
     private List<AllergensEntity> allergens;
+
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public DishEntity setUser(UserEntity user) {
+        this.user = user;
+        return this;
+    }
 
     public String getImageUrl() {
         return imageUrl;

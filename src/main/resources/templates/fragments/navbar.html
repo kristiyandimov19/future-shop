@@ -13,7 +13,7 @@
 <div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">THE SHIRE</a>
+            <a class="navbar-brand" th:href="@{/home}">THE SHIRE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -21,27 +21,30 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" th:href="@{/}">HOME</a>
+                        <a class="nav-link" aria-current="page" th:href="@{/home}">HOME</a>
                     </li>
                     <li sec:authorize="isAuthenticated()" class="nav-item">
                         <a class="nav-link" th:href="@{/dishes/add}">ADD DISH</a>
                     </li>
                     <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/users/login}" role="button">LOGIN</a></li>
                     <li sec:authorize="!isAuthenticated()" class="nav-item"><a class="nav-link" th:href="@{/users/register}" role="button">REGISTER</a></li>
-                    <li sec:authorize="hasAnyAuthority('ADMIN')" class="nav-item"><a class="nav-link" th:href="@{/restaurants/add}" role="button">ADD RESTAURANT</a></li>
-                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <li sec:authorize="isAuthenticated()" ><a th:href="@{/restaurants/all}" class="nav-link" role="button">SHOW RESTAURANTS</a></li>
+                    <li sec:authorize="hasAnyAuthority('ADMIN')" class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Personal
+                            ADMIN
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark bg-dark" aria-labelledby="navbarDropdown">
-                            <li sec:authorize="isAuthenticated()"><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li sec:authorize="hasAnyAuthority('ADMIN')"><a class="dropdown-item" th:href="@{/restaurants/add}">ADD RESTAURANT</a></li>
                             <li sec:authorize="isAuthenticated()"><a class="dropdown-item" href="#">Something else here</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li sec:authorize="isAuthenticated()"><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
+                    </li>
+                    <li class="nav-item" sec:authorize="isAuthenticated()">
+                        <button id="loadDishes" class="btn btn-dark">SHOW DISHES</button>
                     </li>
                     <li class="nav-item" sec:authorize="isAuthenticated()">
                         <form id="logoutForm" th:action="@{/logout}" method="POST">

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar::head">
+</head>
+<body>
+<div th:replace="fragments/navbar::navbar"></div>
+
+<div class="container" th:object="${restaurant}">
+
+    <!-- Portfolio Item Heading -->
+    <h1 class="my-4" th:text="*{name}">Page Heading
+    </h1>
+
+    <!-- Portfolio Item Row -->
+    <div class="row">
+
+        <div class="col-md-8">
+            <img class="img-fluid" th:src="*{imageUrl}" alt="">
+        </div>
+
+        <div class="col-md-4">
+            <h2 class="my-3">Address</h2>
+            <h3 th:text="*{address}">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio,
+                gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus.
+                Mauris ultricies, justo eu convallis placerat, felis enim.</h3>
+            <br>
+            <h3>Dishes</h3>
+            <div class="row mt-4">
+                <div th:each="d : ${dishes}" class="col">
+                    <div class="card  h-100">
+                        <img th:src="${d.getImageUrl()}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="${d.getName()}">Card title</h5>
+                            <p class="card-text" th:text="'Ingredients: ' + ${d.ingredients}">This is a longer card with
+                                supporting text below as a natural lead-in to additional content. This content is a
+                                little bit longer.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style th:replace="fragments/style::style">
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

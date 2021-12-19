@@ -1,7 +1,7 @@
 package com.example.futureshop.models.binding;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -12,8 +12,19 @@ public class RestaurantAddBindingModel {
     @NotBlank
     @Size(min = 5)
     private String address;
-    @NotNull
+    @NotBlank
+    private String imageUrl;
+    @NotEmpty
     private List<String> dishes;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public RestaurantAddBindingModel setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
 
     public String getName() {
         return name;

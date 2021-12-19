@@ -22,6 +22,16 @@ public class DishAddBindingModel {
     private List<AllergensEnum> allergens;
     @NotBlank
     private String imageUrl;
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public DishAddBindingModel setUser(String user) {
+        this.user = user;
+        return this;
+    }
 
     public String getName() {
         return name;

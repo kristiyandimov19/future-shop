@@ -13,6 +13,16 @@ public class DishServiceModel {
     private String ingredients;
     private List<AllergensEnum> allergens;
     private String imageUrl;
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public DishServiceModel setUser(String user) {
+        this.user = user;
+        return this;
+    }
 
     public String getName() {
         return name;

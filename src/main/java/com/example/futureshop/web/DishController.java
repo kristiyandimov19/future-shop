@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/dishes")
@@ -47,7 +48,8 @@ public class DishController {
     @PostMapping("/add")
     public String addDish(@Valid DishAddBindingModel dishAddBindingModel,
                           BindingResult bindingResult,
-                          RedirectAttributes redirectAttributes) {
+                          RedirectAttributes redirectAttributes,
+                          Principal principal) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("dishAddBindingModel", dishAddBindingModel);
@@ -56,6 +58,8 @@ public class DishController {
 
             return "redirect:add";
         }
+
+        dishAddBindingModel.setUser(principal.getName());
 
         DishServiceModel dishServiceModel = modelMapper.map(
                 dishAddBindingModel,
