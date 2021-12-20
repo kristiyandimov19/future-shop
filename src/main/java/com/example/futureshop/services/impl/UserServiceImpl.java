@@ -4,6 +4,7 @@ import com.example.futureshop.models.entities.UserEntity;
 import com.example.futureshop.models.entities.UserRoleEntity;
 import com.example.futureshop.models.entities.enums.UserRoleEnum;
 import com.example.futureshop.models.services.UserRegisterServiceModel;
+import com.example.futureshop.models.views.UserViewModel;
 import com.example.futureshop.repositories.UserRepository;
 import com.example.futureshop.repositories.UserRoleRepository;
 import com.example.futureshop.services.UserService;
@@ -15,7 +16,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -99,4 +102,37 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByUsername(username)
                 .orElseThrow();
     }
+
+    @Override
+    public List<UserViewModel> findAll() {
+        return userRepository.findAll()
+                .stream()
+                .map(ue -> {
+                    List<UserRoleEnum> roles = new ArrayList<>();
+                    UserViewModel userViewModel = modelMapper.map(ue, UserViewModel.class);
+                    ue.getRoles().forEach(r -> {
+                        roles.add(r.getRole());
+                    });
+                    userViewModel.setRoles(roles);
+                    return userViewModel;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public UserViewModel findById(Long id) {
+        return userRepository.findById(id)
+                .map(ue -> {
+                    UserViewModel userViewModel = modelMapper.map(ue, UserViewModel.class);
+                    List<UserRoleEnum> roles = new ArrayList<>();
+                    ue.getRoles().forEach(r -> {
+                        roles.add(r.getRole());
+                    });
+                    userViewModel.setRoles(roles);
+                    return userViewModel;
+                })
+                .orElseThrow();
+    }
+
+
 }

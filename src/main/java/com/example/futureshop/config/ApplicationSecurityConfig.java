@@ -27,7 +27,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                .antMatchers("/restaurants/add", "/users/all")
+                .antMatchers("/restaurants/add", "/users/all", "/users/details/**", "/users/role/**")
                 .hasAuthority("ADMIN")
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
                 .antMatchers("/**")

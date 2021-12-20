@@ -4,7 +4,24 @@
 </head>
 <body>
 <div th:replace="fragments/navbar::navbar"></div>
-
+<table class="table table-striped table-dark">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Username</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="u : ${users}">
+        <th scope="row" th:text="*{u.id}">1</th>
+        <td th:text="*{u.username}">Mark</td>
+        <td><p th:each="r : *{u.roles}" th:text="*{r}"></p></td>
+        <td><a th:href="@{/users/details/{id}(id=${u.getId()})}" class="btn btn-primary" role="button">Edit Roles</a></td>
+    </tr>
+    </tbody>
+</table>
 
 <style th:replace="fragments/style::style">
 </style>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/navbar::head">
+</head>
+<body>
+<div th:replace="fragments/navbar::navbar"></div>
+
+<table class="table table-secondary">
+    <thead>
+    <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Not Added Roles</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row" th:text="${userView.username}"></th>
+        <td><a class="btn btn-danger" th:each="r : ${roles}" th:text="${r.role}" th:href="@{'/users/role/unassign/' + ${userView.id} + '/' + ${r.id}}"></a></td>
+        <td><a class="btn btn-primary" th:each="nr : ${notRoles}" th:text="${nr.role}" th:href="@{'/users/role/assign/' + ${userView.id} + '/' + ${nr.id}}"></a></td>
+    </tr>
+    </tbody>
+</table>
+<!--<div>-->
+<!--    <h3 th:text="${userView.username}">-->
+<!--        User-->
+<!--    </h3>-->
+<!--    <div th:each="r : ${userView.roles}">-->
+<!--        <p th:text="${r}">-->
+
+<!--        </p>-->
+<!--    </div>-->
+<!--    <br>-->
+<!--    <div th:each="nr : ${notRoles}">-->
+<!--        <p th:text="${nr.role}">-->
+
+<!--        </p>-->
+<!--    </div>-->
+
+<!--</div>-->
+
+
+<style th:replace="fragments/style::style">
+</style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+</body>
+</html>
