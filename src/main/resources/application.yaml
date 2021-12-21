@@ -1,9 +1,9 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 'gamemode1910'
+    password: "${PASSWORD}"
     url: jdbc:mysql://localhost:3306/future_shop?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true
-    username: 'root'
+    username: "${USERNAME}"
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
@@ -16,8 +16,3 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-
-cloudinary:
-  cloud-name: dyidaambf
-  api-key: 678139597139657
-  api-secret: "${CLOUDINARY_SECRET}"
